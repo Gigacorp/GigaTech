@@ -112,6 +112,12 @@ class Application extends EventReceiver
 
     @ctx.restore()
 
+  start:() ->
+    @broadcast {
+      type: 'start'
+    }
+    @frame()
+
   frame: () =>
     if @blurred
       return

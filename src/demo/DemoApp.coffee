@@ -29,7 +29,7 @@ class DemoApp extends Application
 
     @root.attach new SpinningRectangle
 
-    @frame()
+    @start()
 
 
 new DemoApp
