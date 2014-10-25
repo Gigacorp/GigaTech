@@ -1,0 +1,12 @@
+{
+  "name": "GigaTech",
+  "version": "0.9.0",
+  "description": "CoffeeScript game engine",
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-watch": "*"
+  }
+}
