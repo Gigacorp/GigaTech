@@ -1,7 +1,9 @@
 class DemoApp extends Application
 
   constructor: () ->
-    super {}
+    super {
+      bgColor: new Color 0, 0, 0
+    }
 
     @root.attach new Rectangle {
       color: new Color 255, 0, 0

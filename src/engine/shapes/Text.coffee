@@ -1,15 +1,15 @@
 class Text extends Shape
 
   constructor: (args={}) ->
-    args.color = args.color or CFG.STD_FG_COLOR.clone()
+    args.color = args.color or APP.fgColor.clone()
 
     super args
 
     @text = args.text or ''
     @textAlign = args.textAlign or 'center'
     @textBaseline = args.textBaseline or 'middle'
-    @fontSize = args.fontSize or CFG.STD_FONT_SIZE
-    @font = args.font or CFG.STD_FONT
+    @fontSize = args.fontSize or APP.fontSize
+    @font = args.font or APP.font
     @alpha = args.alpha
 
   render: (canvas, ctx) ->

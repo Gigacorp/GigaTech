@@ -7,7 +7,7 @@ class DebugDisplay extends Node
       pos: new Vector -APP.w/2, APP.h/2
     }
 
-    @color = CFG.STD_FG_COLOR.clone()
+    @color = APP.fgColor.clone()
 
     @STAY_TIME = 4
     FONT_SIZE = 20

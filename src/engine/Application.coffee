@@ -1,7 +1,14 @@
 class Application extends EventReceiver
 
-  constructor: (args) ->
+  constructor: (args={}) ->
     super args
+
+    @fgColor = args.fgColor or new Color 255, 255, 255
+    @bgColor = args.bgColor or new Color 0, 0, 255
+    @font = args.font or 'Helvetica'
+    @fontSize = args.fontSize or 16
+    @camera = args.camera or new Camera
+    @background = args.background or new Background { color: @bgColor }
 
     window.APP = @
 
@@ -10,27 +17,16 @@ class Application extends EventReceiver
 
     blurred = false
 
-    # if @EJECTA
-      # @canvas.MSAAEnabled = true
-      # @canvas.MSAASamples = 4
-      # ejecta.loadFont "assets/fonts/" + CFG.STD_FONT + ".ttf"
-
     @ctx = @canvas.getContext '2d'
 
     @w = window.innerWidth
     @h = window.innerHeight
-
-    for id, file of CFG.SOUNDS
-      Sound.load id, file
 
     @touch = new TouchInputHandler
     @mouse = new MouseInputHandler
     @keyboard = new KeyboardInputHandler
     @touchGestureDetector = new TouchGestureDetector
     @mouseGestureDetector = new MouseGestureDetector
-
-    @camera = args.camera or new Camera
-    @background = args.background or new Background
 
     @debug = new DebugDisplay
 

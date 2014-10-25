@@ -30,7 +30,7 @@ class TouchGestureDetector extends EventReceiver
       if event.nativeEvent.touches.length > 1 then return
       pos = event.pos.clone()
       len = Vector.sub(pos, @lastTouchStart).mag()
-      if len > CFG.INPUT_DRAG_TRESHOLD
+      if len > 10
         @preventTap = true
         APP.broadcast {
           type: 'touchdrag'

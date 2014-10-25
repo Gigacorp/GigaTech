@@ -52,7 +52,6 @@ module.exports = (grunt) ->
             'src/engine/ScreenAnchors.coffee'
           ]
           'demo/demo.js': [
-            'src/demo/Config.coffee'
             'src/demo/DemoApp.coffee'
           ]
         }

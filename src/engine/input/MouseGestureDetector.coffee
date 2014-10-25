@@ -21,7 +21,7 @@ class MouseGestureDetector extends EventReceiver
       if not @lastMouseDownPos then return
       pos = event.pos.clone()
       len = Vector.sub(pos, @lastMouseDownPos).mag()
-      if len > CFG.INPUT_DRAG_TRESHOLD
+      if len > 10
         @preventClick = true
         APP.broadcast {
           type: 'mousedrag'
