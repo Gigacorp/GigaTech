@@ -30,11 +30,15 @@ class Entity extends EventReceiver
       return Vector.add @parent.getAbsPos(), @pos
     return @pos.clone()
 
-  attachController: (controller) ->
+  attach: (controller) ->
+    if not controller instanceof Controller
+      throw "#{controller} must be instanceof Controller"
     controller.parent = @
     @controllers.push controller
 
-  detachController: (controller) ->
+  detach: (controller) ->
+    if not controller instanceof Controller
+      throw "#{controller} must be instanceof Controller"
     controller.parent = null
     @controllers = @controllers.filter (i) -> i isnt controller
 

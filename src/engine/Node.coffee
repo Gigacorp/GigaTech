@@ -8,13 +8,23 @@ class Node extends Entity
     super()
     @children = []
 
-  attach: (child) ->
-    child.parent = @
-    @children.push child
+  attach: (entityOrController) ->
+    if entityOrController instanceof Controller
+      super entityOrController
+      return
 
-  detach: (child) ->
-    child.parent = null
-    @children = @children.filter (i) -> i isnt child
+    entity = entityOrController
+    entity.parent = @
+    @children.push entity
+
+  detach: (entityOrController) ->
+    if entityOrController instanceof Controller
+      super entityOrController
+      return
+
+    entity = entityOrController
+    entity.parent = null
+    @children = @children.filter (i) -> i isnt entity
 
   update: (delta) ->
     super delta

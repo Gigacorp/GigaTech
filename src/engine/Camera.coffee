@@ -27,8 +27,8 @@ class Camera extends Node
       }
     }
 
-    @attachController @zoomer
-    @attachController @mover
+    @attach @zoomer
+    @attach @mover
 
   setZoom: (zoom) ->
     if zoom > @maxZoom then zoom = @maxZoom

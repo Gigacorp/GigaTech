@@ -9,7 +9,7 @@ class SpinningRectangle extends Rectangle
     }
 
     @pulse = new PulseAnimation
-    @attachController @pulse
+    @attach @pulse
 
     @on 'touchstart', 'mousedown', (event) =>
       if @intersects event.pos

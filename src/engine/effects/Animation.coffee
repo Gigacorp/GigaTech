@@ -1,4 +1,4 @@
-class Animation
+class Animation extends Controller
 
   constructor: (args={}) ->
     @current = 0

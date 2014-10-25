@@ -15,6 +15,7 @@ module.exports = (grunt) ->
             'src/engine/Color.coffee'
             'src/engine/Sound.coffee'
             'src/engine/EventReceiver.coffee'
+            'src/engine/Controller.coffee'
             'src/engine/Entity.coffee'
             'src/engine/Node.coffee'
 

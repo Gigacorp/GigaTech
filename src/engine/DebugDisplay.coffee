@@ -30,7 +30,7 @@ class DebugDisplay extends Node
     }
 
     @attach @text
-    @text.attachController @fader
+    @text.attach @fader
 
   setText: (text) ->
     @fader.stop()
