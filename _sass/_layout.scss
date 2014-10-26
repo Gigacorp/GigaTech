@@ -1,0 +1,33 @@
+.forkme {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+h1,
+h2 {
+    font-family: Lobster;
+}
+
+h1 {
+    // font-size: 35px;
+    // margin: $spacing-unit 0 2*$spacing-unit 0;
+}
+
+.page-content {
+    padding: 2*$spacing-unit 0 $spacing-unit 0;
+}
+
+.page-heading {
+    font-size: 20px;
+}
+
+.post-meta {
+    font-size: $small-font-size;
+    color: $grey-color;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+}
