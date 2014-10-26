@@ -27,7 +27,7 @@ class DemoApp extends Application
       bgColor: new Color 0, 0, 0
     }
 
-    @root.attach new SpinningRectangle
+    @attach new SpinningRectangle
 
     @start()
 

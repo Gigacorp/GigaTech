@@ -1,4 +1,4 @@
-class Application extends EventReceiver
+class Application extends Node
 
   constructor: (args={}) ->
     super args
@@ -32,10 +32,6 @@ class Application extends EventReceiver
 
     @camera.attach @debug
 
-    @root = new Node {
-      id: 'root'
-    }
-
     if not @EJECTA
       @retinaCanvasHack()
 
@@ -66,10 +62,10 @@ class Application extends EventReceiver
     @mouseGestureDetector.callEventListeners event
 
     @camera.callEventListeners event
-    @root.callEventListeners event
+    @callEventListeners event
 
     @camera.broadcast event
-    @root.broadcast event
+    super event
 
   retinaCanvasHack: () ->
     @scaleFactor = if window.devicePixelRatio then window.devicePixelRatio else 1
@@ -91,7 +87,7 @@ class Application extends EventReceiver
     @keyboard.update delta
 
     @camera.update delta
-    @root.update delta
+    super delta
 
     @last = now
 
@@ -105,7 +101,7 @@ class Application extends EventReceiver
 
     @ctx.save()
     @ctx.scale @camera.zoom, @camera.zoom
-    @root.render @canvas, @ctx
+    super @canvas, @ctx
     @ctx.restore()
 
     @camera.render @canvas, @ctx
