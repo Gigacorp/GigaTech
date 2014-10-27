@@ -1498,7 +1498,10 @@ var MouseInputHandler,
 MouseInputHandler = (function(_super) {
   __extends(MouseInputHandler, _super);
 
-  function MouseInputHandler() {
+  function MouseInputHandler(args) {
+    if (args == null) {
+      args = {};
+    }
     MouseInputHandler.__super__.constructor.call(this);
     document.addEventListener('mousedown', (function(_this) {
       return function(ev) {
@@ -1535,7 +1538,9 @@ MouseInputHandler = (function(_super) {
     })(this));
     document.addEventListener('mousewheel', (function(_this) {
       return function(ev) {
-        ev.preventDefault();
+        if (APP.fullscreen) {
+          ev.preventDefault();
+        }
         return _this.queue({
           type: 'mousewheel',
           nativeEvent: ev
@@ -1560,7 +1565,9 @@ TouchInputHandler = (function(_super) {
     document.addEventListener('touchstart', (function(_this) {
       return function(ev) {
         var touchEvent, x, y, _i, _len, _ref, _results;
-        ev.preventDefault();
+        if (APP.fullscreen) {
+          ev.preventDefault();
+        }
         _ref = ev.changedTouches;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -1956,6 +1963,7 @@ Application = (function(_super) {
     this.background = args.background || new Background({
       color: this.bgColor
     });
+    this.fullscreen = Boolean(args.fullscreen);
     window.APP = this;
     this.EJECTA = typeof ejecta !== "undefined";
     this.canvas = document.getElementById('canvas');
