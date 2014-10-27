@@ -3,7 +3,8 @@ class TouchInputHandler extends InputHandler
     super()
 
     document.addEventListener 'touchstart', (ev) =>
-      ev.preventDefault()
+      if APP.fullscreen
+        ev.preventDefault()
       for touchEvent in ev.changedTouches
         x = touchEvent.pageX - APP.w/2
         y = touchEvent.pageY - APP.h/2

@@ -1,5 +1,5 @@
 class MouseInputHandler extends InputHandler
-  constructor: () ->
+  constructor: (args={}) ->
     super()
 
     document.addEventListener 'mousedown', (ev) =>
@@ -27,7 +27,8 @@ class MouseInputHandler extends InputHandler
       }
 
     document.addEventListener 'mousewheel', (ev) =>
-      ev.preventDefault()
+      if APP.fullscreen
+        ev.preventDefault()
       @queue {
         type: 'mousewheel'
         nativeEvent: ev
