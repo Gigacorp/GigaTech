@@ -20,8 +20,8 @@ class Application extends Node
 
     @ctx = @canvas.getContext '2d'
 
-    @w = window.innerWidth
-    @h = window.innerHeight
+    @w = if @fullscreen then window.innerWidth else @canvas.offsetWidth
+    @h = if @fullscreen then window.innerHeight else @canvas.offsetHeight
 
     @touch = new TouchInputHandler
     @mouse = new MouseInputHandler

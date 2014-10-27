@@ -1499,44 +1499,40 @@ MouseInputHandler = (function(_super) {
   __extends(MouseInputHandler, _super);
 
   function MouseInputHandler(args) {
+    var getPos;
     if (args == null) {
       args = {};
     }
     MouseInputHandler.__super__.constructor.call(this);
-    document.addEventListener('mousedown', (function(_this) {
+    getPos = function(ev) {
+      return new Vector(ev.offsetX - APP.w / 2, ev.offsetY - APP.h / 2);
+    };
+    APP.canvas.addEventListener('mousedown', (function(_this) {
       return function(ev) {
-        var x, y;
-        x = ev.x - APP.w / 2;
-        y = ev.y - APP.h / 2;
+        ev.preventDefault();
         return _this.queue({
           type: 'mousedown',
-          pos: new Vector(x, y)
+          pos: getPos(ev)
         });
       };
     })(this));
-    document.addEventListener('mouseup', (function(_this) {
+    APP.canvas.addEventListener('mouseup', (function(_this) {
       return function(ev) {
-        var x, y;
-        x = ev.x - APP.w / 2;
-        y = ev.y - APP.h / 2;
         return _this.queue({
           type: 'mouseup',
-          pos: new Vector(x, y)
+          pos: getPos(ev)
         });
       };
     })(this));
-    document.addEventListener('mousemove', (function(_this) {
+    APP.canvas.addEventListener('mousemove', (function(_this) {
       return function(ev) {
-        var x, y;
-        x = ev.x - APP.w / 2;
-        y = ev.y - APP.h / 2;
         return _this.queue({
           type: 'mousemove',
-          pos: new Vector(x, y)
+          pos: getPos(ev)
         });
       };
     })(this));
-    document.addEventListener('mousewheel', (function(_this) {
+    APP.canvas.addEventListener('mousewheel', (function(_this) {
       return function(ev) {
         if (APP.fullscreen) {
           ev.preventDefault();
@@ -1561,10 +1557,16 @@ TouchInputHandler = (function(_super) {
   __extends(TouchInputHandler, _super);
 
   function TouchInputHandler() {
+    var getPos;
     TouchInputHandler.__super__.constructor.call(this);
-    document.addEventListener('touchstart', (function(_this) {
+    getPos = function(ev) {
+      var ret;
+      ret = new Vector(touchEvent.offsetX - APP.w / 2, touchEvent.offsetY - APP.h / 2);
+      return ret;
+    };
+    APP.canvas.addEventListener('touchstart', (function(_this) {
       return function(ev) {
-        var touchEvent, x, y, _i, _len, _ref, _results;
+        var touchEvent, _i, _len, _ref, _results;
         if (APP.fullscreen) {
           ev.preventDefault();
         }
@@ -1572,41 +1574,42 @@ TouchInputHandler = (function(_super) {
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           touchEvent = _ref[_i];
-          x = touchEvent.pageX - APP.w / 2;
-          y = touchEvent.pageY - APP.h / 2;
           _results.push(_this.queue({
             type: 'touchstart',
-            pos: new Vector(x, y),
+            pos: getPos(ev),
             nativeEvent: ev
           }));
         }
         return _results;
       };
     })(this));
-    document.addEventListener('touchmove', (function(_this) {
+    APP.canvas.addEventListener('touchmove', (function(_this) {
       return function(ev) {
-        var touchEvent, x, y, _i, _len, _ref, _results;
+        var touchEvent, _i, _len, _ref, _results;
         _ref = ev.changedTouches;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           touchEvent = _ref[_i];
-          x = touchEvent.pageX - APP.w / 2;
-          y = touchEvent.pageY - APP.h / 2;
           _results.push(_this.queue({
             type: 'touchmove',
-            pos: new Vector(x, y),
+            pos: getPos(ev),
             nativeEvent: ev
           }));
         }
         return _results;
       };
     })(this));
-    document.addEventListener('touchend', (function(_this) {
+    APP.canvas.addEventListener('touchend', (function(_this) {
       return function(ev) {
         return _this.queue({
           type: 'touchend',
           pos: new Vector(0, 0)
         });
+      };
+    })(this));
+    APP.canvas.addEventListener('touchend', (function(_this) {
+      return function(ev) {
+        return ev.preventDefault();
       };
     })(this));
   }
@@ -1969,8 +1972,8 @@ Application = (function(_super) {
     this.canvas = document.getElementById('canvas');
     blurred = false;
     this.ctx = this.canvas.getContext('2d');
-    this.w = window.innerWidth;
-    this.h = window.innerHeight;
+    this.w = this.fullscreen ? window.innerWidth : this.canvas.offsetWidth;
+    this.h = this.fullscreen ? window.innerHeight : this.canvas.offsetHeight;
     this.touch = new TouchInputHandler;
     this.mouse = new MouseInputHandler;
     this.keyboard = new KeyboardInputHandler;

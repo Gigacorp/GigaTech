@@ -2,31 +2,32 @@ class MouseInputHandler extends InputHandler
   constructor: (args={}) ->
     super()
 
-    document.addEventListener 'mousedown', (ev) =>
-      x = ev.x - APP.w/2
-      y = ev.y - APP.h/2
+    getPos = (ev) ->
+      new Vector(
+        ev.offsetX - APP.w/2,
+        ev.offsetY - APP.h/2
+      )
+
+    APP.canvas.addEventListener 'mousedown', (ev) =>
+      ev.preventDefault()
       @queue {
         type: 'mousedown'
-        pos: new Vector x, y
+        pos: getPos ev
       }
 
-    document.addEventListener 'mouseup', (ev) =>
-      x = ev.x - APP.w/2
-      y = ev.y - APP.h/2
+    APP.canvas.addEventListener 'mouseup', (ev) =>
       @queue {
         type: 'mouseup'
-        pos: new Vector x, y
+        pos: getPos ev
       }
 
-    document.addEventListener 'mousemove', (ev) =>
-      x = ev.x - APP.w/2
-      y = ev.y - APP.h/2
+    APP.canvas.addEventListener 'mousemove', (ev) =>
       @queue {
         type: 'mousemove'
-        pos: new Vector x, y
+        pos: getPos ev
       }
 
-    document.addEventListener 'mousewheel', (ev) =>
+    APP.canvas.addEventListener 'mousewheel', (ev) =>
       if APP.fullscreen
         ev.preventDefault()
       @queue {

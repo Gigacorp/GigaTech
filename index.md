@@ -3,20 +3,20 @@ layout: default
 title: GigaTech
 ---
 
-GigaTech is an HTML5 game engine written in CoffeeScript.
+GigaTech is an open source HTML5 game engine written in CoffeeScript. It uses Canvas2D for rendering.
 
 ## Features
 
- * Powerful scene graph.
+ * Scene graph.
  * Animation system powered by [Easie](https://github.com/jimjeffers/Easie).
  * Event system.
  * Collision detection.
  * Audio support.
- * Use it with [Ejecta](http://impactjs.com/ejecta) to create iOS games.
+ * Use it with [Ejecta](http://impactjs.com/ejecta) (iOS Canvas2D implementation) to create iOS app bundles.
 
-## Demo
+## Simple Example
 
-<iframe src="demo/index.html" frameborder="0"></iframe>
+<canvas id="canvas" width="100%" height="250px"></canvas>
 
 ## Code
 
@@ -57,6 +57,10 @@ class DemoApp extends Application
 
 new DemoApp
 </pre>
+
+## Open Source
+
+The source code for GigaTech is openly available on [GitHub](https://github.com/Gigacorp/GigaTech).
 
 ## License
 
