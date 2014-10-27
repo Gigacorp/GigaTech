@@ -9,6 +9,7 @@ class Application extends Node
     @fontSize = args.fontSize or 16
     @camera = args.camera or new Camera
     @background = args.background or new Background { color: @bgColor }
+    @fullscreen = Boolean(args.fullscreen)
 
     window.APP = @
 
