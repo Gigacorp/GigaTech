@@ -3,6 +3,10 @@ class Application extends Node
   constructor: (args={}) ->
     super args
 
+    window.APP = @
+    @EJECTA = typeof ejecta isnt "undefined"
+    @blurred = false
+
     @fgColor = args.fgColor or new Color 255, 255, 255
     @bgColor = args.bgColor or new Color 0, 0, 255
     @font = args.font or 'Helvetica'
@@ -11,41 +15,50 @@ class Application extends Node
     @background = args.background or new Background { color: @bgColor }
     @fullscreen = Boolean(args.fullscreen)
 
-    window.APP = @
-
-    @EJECTA = typeof ejecta isnt "undefined"
     @canvas = document.getElementById 'canvas'
-
-    blurred = false
-
     @ctx = @canvas.getContext '2d'
 
-    @w = if @fullscreen then window.innerWidth else @canvas.offsetWidth
-    @h = if @fullscreen then window.innerHeight else @canvas.offsetHeight
+    @resize false
 
     @touch = new TouchInputHandler
     @mouse = new MouseInputHandler
     @keyboard = new KeyboardInputHandler
     @touchGestureDetector = new TouchGestureDetector
     @mouseGestureDetector = new MouseGestureDetector
-
     @debug = new DebugDisplay
 
     @camera.attach @debug
 
+    window.onresize = =>
+      @resize()
+
+    window.onfocus = =>
+      @resume()
+
+    window.onblur = =>
+      @pause()
+
+  pause: () ->
+    @blurred = true
+
+  resume: () ->
+    @blurred = false
+    @last = null
+    @frame()
+
+  resize: (broadcast=true) ->
+    @w = if @fullscreen then window.innerWidth else @canvas.offsetWidth
+    @h = if @fullscreen then window.innerHeight else @canvas.offsetHeight
+
     if not @EJECTA
       @retinaCanvasHack()
 
-      window.onresize = =>
-        @retinaCanvasHack()
-
-      window.onfocus = =>
-        @blurred = false
-        @last = null
-        @frame()
-
-      window.onblur = =>
-        @blurred = true
+    if broadcast
+      @broadcast {
+        type: 'resize'
+        w: @w
+        h: @h
+      }
 
   screenToWorld: (p) ->
     ret = Vector.add p, @camera.pos
