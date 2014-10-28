@@ -2,30 +2,42 @@ class TouchInputHandler extends InputHandler
   constructor: () ->
     super()
 
-    document.addEventListener 'touchstart', (ev) =>
+    getPos = (ev) ->
+      ret = new Vector(
+        touchEvent.offsetX - APP.w/2,
+        touchEvent.offsetY - APP.h/2
+      )
+
+      # if not APP.fullscreen
+      #   ret.x -= APP.canvas.offsetLeft
+      #   ret.y -= APP.canvas.offsetTop
+
+      return ret
+
+    APP.canvas.addEventListener 'touchstart', (ev) =>
+      # ev.preventDefault()
       if APP.fullscreen
         ev.preventDefault()
       for touchEvent in ev.changedTouches
-        x = touchEvent.pageX - APP.w/2
-        y = touchEvent.pageY - APP.h/2
         @queue {
           type: 'touchstart'
-          pos: new Vector x, y
+          pos: getPos ev
           nativeEvent: ev
         }
 
-    document.addEventListener 'touchmove', (ev) =>
+    APP.canvas.addEventListener 'touchmove', (ev) =>
       for touchEvent in ev.changedTouches
-        x = touchEvent.pageX - APP.w/2
-        y = touchEvent.pageY - APP.h/2
         @queue {
           type: 'touchmove'
-          pos: new Vector x, y
+          pos: getPos ev
           nativeEvent: ev
         }
 
-    document.addEventListener 'touchend', (ev) =>
+    APP.canvas.addEventListener 'touchend', (ev) =>
       @queue {
         type: 'touchend'
         pos: new Vector 0, 0
       }
+
+    APP.canvas.addEventListener 'touchend', (ev) =>
+      ev.preventDefault()
