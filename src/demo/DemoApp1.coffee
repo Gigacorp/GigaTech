@@ -20,7 +20,7 @@ class SpinningRectangle extends Rectangle
     @rotation += 1.5 * delta
 
 
-class DemoApp extends Application
+class DemoApp1 extends Application
 
   constructor: () ->
     super {
@@ -32,4 +32,4 @@ class DemoApp extends Application
     @start()
 
 
-new DemoApp
+new DemoApp1

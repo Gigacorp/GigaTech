@@ -4,8 +4,8 @@ class TouchInputHandler extends InputHandler
 
     getPos = (ev) ->
       ret = new Vector(
-        touchEvent.offsetX - APP.w/2,
-        touchEvent.offsetY - APP.h/2
+        ev.pageX - APP.w/2,
+        ev.pageY - APP.h/2
       )
 
       # if not APP.fullscreen
@@ -15,13 +15,12 @@ class TouchInputHandler extends InputHandler
       return ret
 
     APP.canvas.addEventListener 'touchstart', (ev) =>
-      # ev.preventDefault()
       if APP.fullscreen
         ev.preventDefault()
       for touchEvent in ev.changedTouches
         @queue {
           type: 'touchstart'
-          pos: getPos ev
+          pos: getPos touchEvent
           nativeEvent: ev
         }
 
@@ -29,7 +28,7 @@ class TouchInputHandler extends InputHandler
       for touchEvent in ev.changedTouches
         @queue {
           type: 'touchmove'
-          pos: getPos ev
+          pos: getPos touchEvent
           nativeEvent: ev
         }
 
