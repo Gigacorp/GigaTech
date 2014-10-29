@@ -1,4 +1,4 @@
-class Camera extends Node
+class Camera extends ScreenAnchors
   constructor: (args={}) ->
     super args
 

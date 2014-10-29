@@ -18,6 +18,7 @@ module.exports = (grunt) ->
             'src/engine/Controller.coffee'
             'src/engine/Entity.coffee'
             'src/engine/Node.coffee'
+            'src/engine/ScreenAnchors.coffee'
 
             'src/engine/shapes/Shape.coffee'
             'src/engine/shapes/Circle.coffee'

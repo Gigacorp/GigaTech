@@ -11,7 +11,6 @@ class Application extends Node
     @bgColor = args.bgColor or new Color 0, 0, 255
     @font = args.font or 'Helvetica'
     @fontSize = args.fontSize or 16
-    @camera = args.camera or new Camera
     @background = args.background or new Background { color: @bgColor }
     @fullscreen = Boolean(args.fullscreen)
 
@@ -19,6 +18,8 @@ class Application extends Node
     @ctx = @canvas.getContext '2d'
 
     @resize false
+
+    @camera = args.camera or new Camera
 
     @touch = new TouchInputHandler
     @mouse = new MouseInputHandler
