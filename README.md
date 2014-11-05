@@ -4,12 +4,19 @@ GigaTech is an HTML5 game engine written in CoffeeScript.
 
 ## Features
 
- * Powerful scene graph.
+ * Scene graph.
  * Animation system powered by [Easie](https://github.com/jimjeffers/Easie).
  * Event system.
  * Collision detection.
  * Audio support.
- * Use it with [Ejecta](http://impactjs.com/ejecta) to create iOS games.
+ * Use in conjunction with [Ejecta](http://impactjs.com/ejecta) to create iOS games.
+
+## Run
+
+```
+$ grunt coffee
+$ open demo/demo1/index.html
+```
 
 ## License
 
