@@ -37,4 +37,4 @@ class Animation extends Controller
 
     if @current == @duration
       @stop()
-      if @onDone then @onDone()
+      if @onDone then @onDone @

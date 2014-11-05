@@ -21,3 +21,8 @@ class StateAnimation extends Animation
     if @state2.rotation isnt undefined
       change = @state2.rotation - @state1.rotation
       @parent.rotation = @f @current, @state1.rotation, change, @duration
+
+  flip: () ->
+    tmp = @state1
+    @state1 = @state2
+    @state2 = tmp
