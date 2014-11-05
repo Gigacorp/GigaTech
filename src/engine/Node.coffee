@@ -26,6 +26,9 @@ class Node extends Entity
     entity.parent = null
     @children = @children.filter (i) -> i isnt entity
 
+  getAllByClass: (klass) ->
+    @children.filter (i) -> i instanceof klass
+
   update: (delta) ->
     super delta
 
