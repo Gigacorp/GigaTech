@@ -6,6 +6,8 @@ class Animation extends Controller
     @paused = true
     @f = args.f or Easie.linearNone
     @onDone = args.onDone or null
+    if args.play
+      @play()
 
   pause: () ->
     @paused = true
