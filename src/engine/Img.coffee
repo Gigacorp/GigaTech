@@ -15,7 +15,7 @@ class Img extends Entity
       @img = cache[src]
     else
       @img = new Image()
-      @img.src = Img.PATH + '/' + src
+      @img.src = args.result or "#{Img.PATH}/#{src}"
       cache[src] = @img
 
   intersects: (p) ->
