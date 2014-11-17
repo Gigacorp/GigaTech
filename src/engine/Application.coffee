@@ -21,11 +21,12 @@ class Application extends Node
 
     @camera = args.camera or new Camera
 
-    @touch = new TouchInputHandler
-    @mouse = new MouseInputHandler
-    @keyboard = new KeyboardInputHandler
-    @touchGestureDetector = new TouchGestureDetector
-    @mouseGestureDetector = new MouseGestureDetector
+    @inputHandlers = args.inputHandlers or [
+      new TouchInputHandler
+      new MouseInputHandler
+      new KeyboardInputHandler
+    ]
+
     @debug = new DebugDisplay
 
     @camera.attach @debug
@@ -73,9 +74,6 @@ class Application extends Node
   broadcast: (event) ->
     @callEventListeners event
 
-    @touchGestureDetector.callEventListeners event
-    @mouseGestureDetector.callEventListeners event
-
     @camera.callEventListeners event
     @callEventListeners event
 
@@ -97,9 +95,8 @@ class Application extends Node
     now = new Date().getTime()
     delta = if @last then (now - @last) / 1000 else 0
 
-    @mouse.update delta
-    @touch.update delta
-    @keyboard.update delta
+    for input in @inputHandlers
+      input.update delta
 
     @camera.update delta
     super delta
