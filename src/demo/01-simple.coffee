@@ -20,11 +20,12 @@ class SpinningRectangle extends Rectangle
     @rotation += 1.5 * delta
 
 
-class DemoApp1 extends Application
+class App extends Application
 
   constructor: () ->
     super {
       bgColor: new Color 0, 0, 0
+      fullscreen: true
     }
 
     @attach new SpinningRectangle
@@ -32,4 +33,4 @@ class DemoApp1 extends Application
     @start()
 
 
-new DemoApp1
+new App

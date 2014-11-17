@@ -52,11 +52,11 @@ module.exports = (grunt) ->
 
             'src/engine/LocalStorage.coffee'
           ]
-          'demo/demo1/demo.js': [
-            'src/demo/DemoApp1.coffee'
+          'demo/01-simple/demo.js': [
+            'src/demo/01-simple.coffee'
           ]
-          'demo/demo2/demo.js': [
-            'src/demo/DemoApp2.coffee'
+          'demo/02-html5-drag-and-drop/demo.js': [
+            'src/demo/02-html5-drag-and-drop.coffee'
           ]
         }
       }
